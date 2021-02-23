@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<body style="background-color: lightgrey">
+
+<section class="h-100" >
+    <div class="card h-100 container-fluid">
+
+        <div class="card-header text-center">
+            <h3>
+                Studentlar
+            </h3>
+<!--            <form action="/" method="get" id="searchForm" >-->
+<!--                <input oninput="search1()" id="search" name="search" class="form-control" placeholder="Qidirish">-->
+<!--                <button id="btn" type="submit">Search</button>-->
+<!--            </form>-->
+        </div>
+
+        <div class="card-body" >
+
+            <table class="table">
+                <tr class="">
+                    <td>
+                        Yangi student qo'shish:
+                    </td>
+
+                    <form action="/add" method="post">
+                        <td>
+                            <input class="form-control" id="name" name="name"  type="text" placeholder="Student ismi">
+                        </td>
+                        <td>
+                            <input class="form-control" id="surname" name="surname"  placeholder="Familiyasi">
+                        </td>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-success" style="">Yangi qo'shish</button>
+                        </td>
+                    </form>
+
+                </tr>
+
+                <tr class="">
+                    <th>id</th>
+                    <th>Ismi</th>
+                    <th>Kursi</th>
+                    <th>Tools</th>
+                </tr>
+
+
+
+
+                <div th:each="t: ${students}">
+
+                    <tr>
+                        <form action="/edit" method="post">
+                            <td th:text="${t.id}"></td>
+                            <input type="hidden" th:value="${t.id}" placeholder="id" name="id">
+                            <td>
+                                <input th:value="${t.name}" placeholder="name" name="name" id="ism" class="form-control">
+                            </td>
+                            <td>
+                                <input th:value="${t.surname}" placeholder="surname" name="surname" id="" class="form-control">
+                            </td>
+                            <td class="text-center">
+                                <button type="submit" class="btn btn-success">Yangilash</button>
+                                <a th:href="'/delete/'+${t.id}" type="submit" class="btn btn-danger">O'chirish</a>
+                            </td>
+                        </form>
+                    </tr>
+                </div>
+
+
+
+
+
+<!--                <tr>-->
+<!--                    <form action="/" method="post">-->
+<!--                        <td></td>-->
+<!--                        <input type="hidden" placeholder="id" name="id">-->
+
+
+<!--                        <td>-->
+
+<!--                            <input placeholder="ism" name="mavzu" id="ism" class="form-control">-->
+
+<!--                        </td>-->
+
+<!--                        <td>-->
+
+<!--                            <input placeholder="kurs" name="kurs" id="kurs" class="form-control">-->
+
+<!--                        </td>-->
+
+<!--                        <td class="text-center">-->
+<!--                            <button type="submit" class="btn btn-success">Yangilash</button>-->
+<!--                            <a href="'/?id='" type="submit" class="btn btn-danger">O'chirish</a>-->
+<!--                        </td>-->
+
+<!--                    </form>-->
+
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <form action="/" method="post">-->
+<!--                        <td></td>-->
+<!--                        <input type="hidden" placeholder="id" name="id">-->
+
+
+<!--                        <td>-->
+
+<!--                            <input placeholder="ism" name="mavzu" id="ism" class="form-control">-->
+
+<!--                        </td>-->
+
+<!--                        <td>-->
+
+<!--                            <input placeholder="kurs" name="kurs" id="kurs" class="form-control">-->
+
+<!--                        </td>-->
+
+<!--                        <td class="text-center">-->
+<!--                            <button type="submit" class="btn btn-success">Yangilash</button>-->
+<!--                            <a href="'/?id='" type="submit" class="btn btn-danger">O'chirish</a>-->
+<!--                        </td>-->
+
+<!--                    </form>-->
+
+<!--                </tr>-->
+            </table>
+<!--            <div class="row text-center d-flex justify-content-center container">-->
+<!--                <a href="/?page=" type="submit" class="col-1 m-1 border btn btn-success" >1</a>-->
+<!--            </div>-->
+        </div>
+    </div>
+</section>
+</body>
+<script>
+    function search1(){
+        let value=document.getElementById("search").value;
+        let button=document.getElementById("btn");
+        if (value!==null&&value!==""){
+
+            button.click();
+        }
+
+    }
+</script>
+</html>
